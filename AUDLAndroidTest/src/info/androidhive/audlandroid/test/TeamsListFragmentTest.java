@@ -44,7 +44,7 @@ public class TeamsListFragmentTest extends android.test.ActivityInstrumentationT
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<TeamsListItem> teamsList = teamsFrag.parseJSON(jsonResult); 
 		assertEquals("Testing the parse json of TeamsListFragment", 2, teamsList.size());
-		assertEquals("Testing the parsing of team name", teamsList.get(0).getTeamName(), "Madison Radicals");
-		assertEquals("Testing the parsing of team id", teamsList.get(0).getTeamId(), "224002");
+		assertEquals("Testing the parsing of team name", "Madison Radicals", teamsList.get(0).getTeamName());
+		assertEquals("Testing the parsing of team id", "224002", teamsList.get(0).getTeamId());
 	}
 }

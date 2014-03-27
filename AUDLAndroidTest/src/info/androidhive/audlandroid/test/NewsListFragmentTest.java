@@ -42,7 +42,7 @@ public class NewsListFragmentTest extends android.test.ActivityInstrumentationTe
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<NewsListItem> newsList = newsFrag.parseJSON(jsonResult); 
 		assertEquals("Testing the parse json of NewsListFragment", 2, newsList.size());
-		assertEquals("Testing the parsing of news header", newsList.get(0).getNewsHeadline(), "AUDL Annouces the signing of Brodie Smith");
-		assertEquals("Testing the parsing of news url", newsList.get(0).getNewsURL(), "http://www.theaudl.com/articles/ata/brodie");
+		assertEquals("Testing the parsing of news header", "AUDL Annouces the signing of Brodie Smith", newsList.get(0).getNewsHeadline());
+		assertEquals("Testing the parsing of news url", "http://www.theaudl.com/articles/ata/brodie", newsList.get(0).getNewsURL());
 	}
 }

@@ -54,19 +54,19 @@ public class ScheduleDivisionFragmentTest extends android.test.ActivityInstrumen
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<ScheduleListItem> schedItems1 = schedFrag.parseJSON(jsonResult, "Midwestern");
 		assertEquals("Division 1 : Testing number of items parsed", schedItems1.size(), 2);
-		assertEquals("Division 1 : Testing parsing of home team name", schedItems1.get(0).getHomeTeam(), "Madison Radicals");
-		assertEquals("Division 1 : Testing parsing of home team id", schedItems1.get(0).getHomeTeamID(), "224002");
-		assertEquals("Division 1 : Testing parsing of away team name", schedItems1.get(0).getAwayTeam(), "Indianapolis AlleyCats");
-		assertEquals("Division 1 : Testing parsing of away team id", schedItems1.get(0).getAwayTeamID(), "253001");
-		assertEquals("Division 1 : Testing parsing of date", schedItems1.get(0).getDate(), "4/13/14");
-		assertEquals("Division 1 : Testing parsing of date", schedItems1.get(0).getTime(), "3:30 PM EST");
+		assertEquals("Division 1 : Testing parsing of home team name", "Madison Radicals", schedItems1.get(0).getHomeTeam());
+		assertEquals("Division 1 : Testing parsing of home team id", "224002", schedItems1.get(0).getHomeTeamID());
+		assertEquals("Division 1 : Testing parsing of away team name", "Indianapolis AlleyCats", schedItems1.get(0).getAwayTeam());
+		assertEquals("Division 1 : Testing parsing of away team id", "253001", schedItems1.get(0).getAwayTeamID());
+		assertEquals("Division 1 : Testing parsing of date", "4/13/14", schedItems1.get(0).getDate());
+		assertEquals("Division 1 : Testing parsing of date", "3:30 PM EST", schedItems1.get(0).getTime());
 		ArrayList<ScheduleListItem> schedItems2 = schedFrag.parseJSON(jsonResult, "Eastern");
 		assertEquals("Division 2 : Testing number of items parsed", schedItems2.size(), 1);
-		assertEquals("Division 2 : Testing parsing of home team name", schedItems2.get(0).getHomeTeam(), "Toronto Rush");
-		assertEquals("Division 2 : Testing parsing of home team id", schedItems2.get(0).getHomeTeamID(), "195002");
-		assertEquals("Division 2 : Testing parsing of away team name", schedItems2.get(0).getAwayTeam(), "New York Empire");
-		assertEquals("Division 2 : Testing parsing of away team id", schedItems2.get(0).getAwayTeamID(), "208003");
-		assertEquals("Division 2 : Testing parsing of date", schedItems2.get(0).getDate(), "4/13/14");
-		assertEquals("Division 2 : Testing parsing of date", schedItems2.get(0).getTime(), "12:00 PM EST");
+		assertEquals("Division 2 : Testing parsing of home team name",  "Toronto Rush", schedItems2.get(0).getHomeTeam());
+		assertEquals("Division 2 : Testing parsing of home team id", "195002", schedItems2.get(0).getHomeTeamID());
+		assertEquals("Division 2 : Testing parsing of away team name", "New York Empire", schedItems2.get(0).getAwayTeam());
+		assertEquals("Division 2 : Testing parsing of away team id", "208003", schedItems2.get(0).getAwayTeamID());
+		assertEquals("Division 2 : Testing parsing of date", "4/13/14", schedItems2.get(0).getDate());
+		assertEquals("Division 2 : Testing parsing of date", "12:00 PM EST", schedItems2.get(0).getTime());
 	}
 }
