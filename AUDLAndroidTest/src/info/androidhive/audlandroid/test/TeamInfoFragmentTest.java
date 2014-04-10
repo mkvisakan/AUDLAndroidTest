@@ -44,6 +44,7 @@ public class TeamInfoFragmentTest extends android.test.ActivityInstrumentationTe
 
         teamFrag = (TeamsInfoFragment) mFragmentManager.findFragmentByTag("tag");
     }
+	
 
 	public void testAvailability() throws Exception {
         assertNotNull(teamFrag);
@@ -52,7 +53,13 @@ public class TeamInfoFragmentTest extends android.test.ActivityInstrumentationTe
 	public void testParseJson() throws Exception {
 		String response = "[[[\"Madison\", \"Radicals\", 224002], [\"Benjy K\", \"1\"], [\"Andrew M\", \"2\"]], [\"Madison Radicals\", 224002, [\"4/12/14\", \"7:30 PM EST\", \"Cincinnati Revolution\", 183001], [\"4/13/14\", \"3:30 PM EST\", \"Indianapolis AlleyCats\", 253001], [\"4/19/14\", \"12:00 AM EST\", \"Detroit Mechanix\", 219001]], [[\"Madison\", \"Radicals\", 224002], [\"Goals\", [[\"Scott R\", 42], [\"Nate T\", 36], [\"Pat S\", 36]]], [\"Assists\", [[\"Animal\", 55]]], [\"Drops\", [[\"Dave W\", 8]]], [\"Throwaways\", [[\"Dave W\", 56]]], [\"PMC\", [[\"Scott R\", 75], [\"Pat S\", 61]]], [\"Ds\", [[\"Dave W\", 28]]]]]";
 		JSONArray jsonResult = new JSONArray(response);
-		TeamsListItem team = teamFrag.parseJSON(jsonResult, "Madison Radicals", "224002"); 
+		TeamsListItem team = teamFrag.parseJSON(jsonResult, "Madison Radicals", "224002");
+		try {
+			synchronized (this) {
+				wait(3000);
+			}
+		} catch(InterruptedException ex){	
+		}
 		assertEquals("Testing the parse json of TeamsInfoFragment", 2, team.getPlayerNames().size());
 		assertEquals("Testing the parsing of team player names", "Benjy K", team.getPlayerNames().get(0));
 		assertEquals("Testing the parsing of team player id", "1", team.getPlayerIds().get(0));

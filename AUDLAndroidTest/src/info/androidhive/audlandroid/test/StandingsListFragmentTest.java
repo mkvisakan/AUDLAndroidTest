@@ -18,6 +18,7 @@ public class StandingsListFragmentTest extends android.test.ActivityInstrumentat
 		super(MainActivity.class);
 	}
 	
+	@Override
 	protected void setUp() throws Exception{
 		super.setUp();
 		setActivityInitialTouchMode(false);
@@ -30,6 +31,7 @@ public class StandingsListFragmentTest extends android.test.ActivityInstrumentat
 		mFragment = (StandingsListFragment) mFragmentManager.findFragmentByTag("tag");
 	}
 	
+	
 	public void testAvailability() throws Exception {
 		assertNotNull(mFragment);
 	}
@@ -38,6 +40,12 @@ public class StandingsListFragmentTest extends android.test.ActivityInstrumentat
 		String response = "[[\"Midwest Division\", [\"Madison Radicals\", 10, 3], [\"Chicago Wildfire\", 9, 4]], [\"Eastern Division\", [\"DC Breeze\", 10, 3], [\"New York Empire\", 9, 4]]]";
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<ArrayList<TeamRecordItem>> leagueRecords = mFragment.parseJSON(jsonResult);
+		try {
+			synchronized (this) {
+				wait(3000);
+			}
+		} catch(InterruptedException ex){	
+		}
 		assertEquals("Number of Divisions",2,leagueRecords.size());
 		assertEquals("Number of Teams in Midwest Division",2,leagueRecords.get(0).size());
 		assertEquals("Number of Teams in Eastern Division",2,leagueRecords.get(0).size());

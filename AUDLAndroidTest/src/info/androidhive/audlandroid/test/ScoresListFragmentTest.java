@@ -20,6 +20,7 @@ public class ScoresListFragmentTest extends android.test.ActivityInstrumentation
 		super(MainActivity.class);
 	}
 	
+	@Override
 	protected void setUp() throws Exception{
 		super.setUp();
 		setActivityInitialTouchMode(false);
@@ -32,6 +33,8 @@ public class ScoresListFragmentTest extends android.test.ActivityInstrumentation
 		
 		mFragment = (ScoresListFragment) mManager.findFragmentByTag("tag");
 	}
+	
+	
 	public void testAvailability() throws Exception{
 		assertNotNull(mFragment);
 	}
@@ -40,6 +43,12 @@ public class ScoresListFragmentTest extends android.test.ActivityInstrumentation
 		String response = "[[\"Western\", [[\"San Francisco FlameThrowers\", 5094953273262080, \"San Jose Spiders\", 6597766625099776, \"4/12/14\", \"7:00 PM PST\", \"0-0\"], [\"Vancouver Riptide\", 6226234774126592, \"Salt Lake Lions\", 5716606839685120, \"4/12/14\", \"7:00 PM MST\", \"0-0\"]]]]";
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<ArrayList<ScoreListItem>> scoreList = mFragment.parseJSON(jsonResult);
+		try {
+			synchronized (this) {
+				wait(3000);
+			}
+		} catch(InterruptedException ex){	
+		}
 		Log.i("Test","Nirav" + scoreList.toString());
 		assertEquals("Number of divisions",1,scoreList.size());
 		assertEquals("Number of Scores in Western division",scoreList.get(0).size(),2);

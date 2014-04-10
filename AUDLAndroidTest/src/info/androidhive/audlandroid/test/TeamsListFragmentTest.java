@@ -42,7 +42,13 @@ public class TeamsListFragmentTest extends android.test.ActivityInstrumentationT
 	public void testParseJson() throws Exception {
 		String response = "[[\"Madison Radicals\", 224002], [\"New York Empire\", 208003]]";
 		JSONArray jsonResult = new JSONArray(response);
-		ArrayList<TeamsListItem> teamsList = teamsFrag.parseJSON(jsonResult); 
+		ArrayList<TeamsListItem> teamsList = teamsFrag.parseJSON(jsonResult);
+		try {
+			synchronized (this) {
+				wait(3000);
+			}
+		} catch(InterruptedException ex){	
+		}
 		assertEquals("Testing the parse json of TeamsListFragment", 2, teamsList.size());
 		assertEquals("Testing the parsing of team name", "Madison Radicals", teamsList.get(0).getTeamName());
 		assertEquals("Testing the parsing of team id", "224002", teamsList.get(0).getTeamId());

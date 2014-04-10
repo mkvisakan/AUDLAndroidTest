@@ -32,17 +32,24 @@ public class NewsListFragmentTest extends android.test.ActivityInstrumentationTe
 
         newsFrag = (NewsListFragment) mFragmentManager.findFragmentByTag("tag");
     }
-
+	
 	public void testAvailability() throws Exception {
         assertNotNull(newsFrag);
     }
 	
 	public void testParseJson() throws Exception {
-		String response = "[\"AUDL News\", [\"AUDL Annouces the signing of Brodie Smith\", \"http://www.theaudl.com/articles/ata/brodie\"], [\"Championship Weekend III Comes to Toronto\", \"http://www.theaudl.com/articles/ata/champ2104\"]]";
+		String response = "[\"AUDL News\", [\"AUDL Annouces the signing of Brodie Smith\", \"http://www.theaudl.com/articles/ata/brodie\", \"11 Mar 2014\"], [\"Championship Weekend III Comes to Toronto\", \"http://www.theaudl.com/articles/ata/champ2104\", \"11 Mar 2014\"]]";
 		JSONArray jsonResult = new JSONArray(response);
-		ArrayList<NewsListItem> newsList = newsFrag.parseJSON(jsonResult); 
+		ArrayList<NewsListItem> newsList = newsFrag.parseJSON(jsonResult);
+		try {
+			synchronized (this) {
+				wait(3000);
+			}
+		} catch(InterruptedException ex){	
+		}
 		assertEquals("Testing the parse json of NewsListFragment", 2, newsList.size());
 		assertEquals("Testing the parsing of news header", "AUDL Annouces the signing of Brodie Smith", newsList.get(0).getNewsHeadline());
 		assertEquals("Testing the parsing of news url", "http://www.theaudl.com/articles/ata/brodie", newsList.get(0).getNewsURL());
+		assertEquals("Testing the parsing of news datetime", "11 Mar 2014", newsList.get(0).getDatetime());
 	}
 }
