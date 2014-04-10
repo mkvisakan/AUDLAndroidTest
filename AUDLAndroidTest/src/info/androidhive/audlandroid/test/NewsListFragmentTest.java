@@ -10,27 +10,16 @@ import info.androidhive.audlandroid.MainActivity;
 import info.androidhive.audlandroid.NewsListFragment;
 import info.androidhive.audlandroid.model.NewsListItem;
 
-public class NewsListFragmentTest extends android.test.ActivityInstrumentationTestCase2<MainActivity>{
-	private FragmentManager mFragmentManager;
+public class NewsListFragmentTest extends android.test.AndroidTestCase{
 	private NewsListFragment newsFrag;
-	private MainActivity activity;
 	
 	public NewsListFragmentTest() {
-		super(MainActivity.class);
 	}
 	
 	@Override
     protected void setUp() throws Exception {
         super.setUp();
-        setActivityInitialTouchMode(false);
-        activity = getActivity();
-        mFragmentManager = activity.getSupportFragmentManager();
-        mFragmentManager.beginTransaction()
-         .add(android.R.id.content, new NewsListFragment(), "tag")
-         .commit();
-        getInstrumentation().waitForIdleSync();
-
-        newsFrag = (NewsListFragment) mFragmentManager.findFragmentByTag("tag");
+        newsFrag = new NewsListFragment();
     }
 	
 	public void testAvailability() throws Exception {
@@ -41,12 +30,6 @@ public class NewsListFragmentTest extends android.test.ActivityInstrumentationTe
 		String response = "[\"AUDL News\", [\"AUDL Annouces the signing of Brodie Smith\", \"http://www.theaudl.com/articles/ata/brodie\", \"11 Mar 2014\"], [\"Championship Weekend III Comes to Toronto\", \"http://www.theaudl.com/articles/ata/champ2104\", \"11 Mar 2014\"]]";
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<NewsListItem> newsList = newsFrag.parseJSON(jsonResult);
-		try {
-			synchronized (this) {
-				wait(3000);
-			}
-		} catch(InterruptedException ex){	
-		}
 		assertEquals("Testing the parse json of NewsListFragment", 2, newsList.size());
 		assertEquals("Testing the parsing of news header", "AUDL Annouces the signing of Brodie Smith", newsList.get(0).getNewsHeadline());
 		assertEquals("Testing the parsing of news url", "http://www.theaudl.com/articles/ata/brodie", newsList.get(0).getNewsURL());

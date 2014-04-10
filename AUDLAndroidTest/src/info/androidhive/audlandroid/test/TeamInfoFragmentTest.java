@@ -15,34 +15,16 @@ import info.androidhive.audlandroid.model.NewsListItem;
 import info.androidhive.audlandroid.model.TeamsListItem;
 import info.androidhive.audlandroid.model.VideosListItem;
 
-public class TeamInfoFragmentTest extends android.test.ActivityInstrumentationTestCase2<MainActivity>{
-	private FragmentManager mFragmentManager;
+public class TeamInfoFragmentTest extends android.test.AndroidTestCase{
 	private TeamsInfoFragment teamFrag;
-	private MainActivity activity;
 	
 	public TeamInfoFragmentTest() {
-		super(MainActivity.class);
 	}
 	
 	@Override
     protected void setUp() throws Exception {
         super.setUp();
-        setActivityInitialTouchMode(false);
-        activity = getActivity();
-        
         teamFrag = new TeamsInfoFragment();
-        Bundle args = new Bundle();
-		args.putString("TEAM_ID", "224002");
-		args.putString("TEAM_NAME", "Madison Radicals");
-		teamFrag.setArguments(args);
-		
-        mFragmentManager = activity.getSupportFragmentManager();
-        mFragmentManager.beginTransaction()
-         .add(android.R.id.content, teamFrag, "tag")
-         .commit();
-        getInstrumentation().waitForIdleSync();
-
-        teamFrag = (TeamsInfoFragment) mFragmentManager.findFragmentByTag("tag");
     }
 	
 
@@ -54,12 +36,6 @@ public class TeamInfoFragmentTest extends android.test.ActivityInstrumentationTe
 		String response = "[[[\"Madison\", \"Radicals\", 224002], [\"Benjy K\", \"1\"], [\"Andrew M\", \"2\"]], [\"Madison Radicals\", 224002, [\"4/12/14\", \"7:30 PM EST\", \"Cincinnati Revolution\", 183001], [\"4/13/14\", \"3:30 PM EST\", \"Indianapolis AlleyCats\", 253001], [\"4/19/14\", \"12:00 AM EST\", \"Detroit Mechanix\", 219001]], [[\"Madison\", \"Radicals\", 224002], [\"Goals\", [[\"Scott R\", 42], [\"Nate T\", 36], [\"Pat S\", 36]]], [\"Assists\", [[\"Animal\", 55]]], [\"Drops\", [[\"Dave W\", 8]]], [\"Throwaways\", [[\"Dave W\", 56]]], [\"PMC\", [[\"Scott R\", 75], [\"Pat S\", 61]]], [\"Ds\", [[\"Dave W\", 28]]]]]";
 		JSONArray jsonResult = new JSONArray(response);
 		TeamsListItem team = teamFrag.parseJSON(jsonResult, "Madison Radicals", "224002");
-		try {
-			synchronized (this) {
-				wait(3000);
-			}
-		} catch(InterruptedException ex){	
-		}
 		assertEquals("Testing the parse json of TeamsInfoFragment", 2, team.getPlayerNames().size());
 		assertEquals("Testing the parsing of team player names", "Benjy K", team.getPlayerNames().get(0));
 		assertEquals("Testing the parsing of team player id", "1", team.getPlayerIds().get(0));

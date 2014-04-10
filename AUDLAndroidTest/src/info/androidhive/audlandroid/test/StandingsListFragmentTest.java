@@ -10,25 +10,17 @@ import info.androidhive.audlandroid.StandingsListFragment;
 import info.androidhive.audlandroid.model.TeamRecordItem;
 import android.support.v4.app.FragmentManager;
 
-public class StandingsListFragmentTest extends android.test.ActivityInstrumentationTestCase2<MainActivity>{
-	private FragmentManager mFragmentManager;
+public class StandingsListFragmentTest extends android.test.AndroidTestCase{
 	private StandingsListFragment mFragment;
-	private MainActivity activity;
+	
 	public StandingsListFragmentTest() {
-		super(MainActivity.class);
+		
 	}
 	
 	@Override
 	protected void setUp() throws Exception{
 		super.setUp();
-		setActivityInitialTouchMode(false);
-		activity = getActivity();
-		
 		mFragment = new StandingsListFragment();
-		mFragmentManager = activity.getSupportFragmentManager();
-		mFragmentManager.beginTransaction().add(android.R.id.content, mFragment,"tag").commit();
-		getInstrumentation().waitForIdleSync();
-		mFragment = (StandingsListFragment) mFragmentManager.findFragmentByTag("tag");
 	}
 	
 	
@@ -40,12 +32,6 @@ public class StandingsListFragmentTest extends android.test.ActivityInstrumentat
 		String response = "[[\"Midwest Division\", [\"Madison Radicals\", 10, 3], [\"Chicago Wildfire\", 9, 4]], [\"Eastern Division\", [\"DC Breeze\", 10, 3], [\"New York Empire\", 9, 4]]]";
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<ArrayList<TeamRecordItem>> leagueRecords = mFragment.parseJSON(jsonResult);
-		try {
-			synchronized (this) {
-				wait(3000);
-			}
-		} catch(InterruptedException ex){	
-		}
 		assertEquals("Number of Divisions",2,leagueRecords.size());
 		assertEquals("Number of Teams in Midwest Division",2,leagueRecords.get(0).size());
 		assertEquals("Number of Teams in Eastern Division",2,leagueRecords.get(0).size());

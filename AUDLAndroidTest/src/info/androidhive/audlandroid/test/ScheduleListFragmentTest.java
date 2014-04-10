@@ -17,33 +17,17 @@ import info.androidhive.audlandroid.model.NewsListItem;
 import info.androidhive.audlandroid.model.ScheduleListItem;
 import info.androidhive.audlandroid.model.TeamsListItem;
 
-public class ScheduleListFragmentTest extends android.test.ActivityInstrumentationTestCase2<MainActivity>{
-	private FragmentManager mFragmentManager;
+public class ScheduleListFragmentTest extends android.test.AndroidTestCase{
 	private ScheduleListFragment schedFrag;
-	private MainActivity activity;
 	
 	public ScheduleListFragmentTest() {
-		super(MainActivity.class);
+		
 	}
 	
 	@Override
     protected void setUp() throws Exception {
         super.setUp();
-        setActivityInitialTouchMode(false);
-        activity = getActivity();
-        
         schedFrag = new ScheduleListFragment();
-        Bundle midwesternArgs = new Bundle();
-    	midwesternArgs.putString("DIVISION_NAME", "Midwestern");
-    	schedFrag.setArguments(midwesternArgs);
-    	
-        mFragmentManager = activity.getSupportFragmentManager();
-        mFragmentManager.beginTransaction()
-         .add(android.R.id.content, schedFrag, "tag")
-         .commit();
-        getInstrumentation().waitForIdleSync();
-
-        schedFrag = (ScheduleListFragment) mFragmentManager.findFragmentByTag("tag");
     }
 	
 
@@ -55,13 +39,7 @@ public class ScheduleListFragmentTest extends android.test.ActivityInstrumentati
 		String response = "[[\"Midwestern\", [[\"Madison Radicals\", 224002, \"Indianapolis AlleyCats\", 253001, \"4/13/14\", \"3:30 PM EST\"], [\"Madison Radicals\", 224002, \"Cincinnati Revolution\", 183001, \"4/12/14\", \"7:30 PM EST\"]]], [\"Eastern\", [[\"Toronto Rush\", 195002, \"New York Empire\", 208003, \"4/13/14\", \"12:00 PM EST\"]]]]";
 		JSONArray jsonResult = new JSONArray(response);
 		HashMap<String, ArrayList<ScheduleListItem>> schedMap = schedFrag.parseJSON(jsonResult);
-		try {
-			synchronized (this) {
-				wait(3000);
-			}
-		} catch(InterruptedException ex){	
-		}
-		ArrayList<ScheduleListItem> schedItems1 = schedMap.get("MidWestern");
+		ArrayList<ScheduleListItem> schedItems1 = schedMap.get("Midwestern");
 		ArrayList<ScheduleListItem> schedItems2 = schedMap.get("Eastern");
 		assertEquals("Division 1 : Testing number of items parsed", schedItems1.size(), 2);
 		assertEquals("Division 1 : Testing parsing of home team name", "Madison Radicals", schedItems1.get(0).getHomeTeam());
