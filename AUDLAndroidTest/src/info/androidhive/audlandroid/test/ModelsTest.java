@@ -99,33 +99,21 @@ public class ModelsTest extends android.test.AndroidTestCase{
 		TeamsListItem obj = new TeamsListItem("name", "id");
 		assertNotNull(obj);
 		obj.addPlayer("player_name", "player_id");
-		obj.addAssists("player", "count");
-		obj.addDrops("player", "count");
-		obj.addDs("player", "count");
-		obj.addGoals("player", "goalsCount");
-		obj.addPMC("player", "count");
+		obj.addStats("goals", "player1", "1");
+		obj.addStats("drops", "player2", "4");
 		obj.addSchedule("team", "teamId", "date", "time");
-		obj.addThrowAways("player", "count");
 		assertEquals("name", obj.getTeamName());
 		assertEquals("id", obj.getTeamId());
 		assertEquals("player_name", obj.getPlayerNames().get(0));
 		assertEquals("player_id", obj.getPlayerIds().get(0));
-		assertEquals("player", obj.getAssistPlayers().get(0));
-		assertEquals("count", obj.getAssists().get(0));
-		assertEquals("player", obj.getDropPlayers().get(0));
-		assertEquals("count", obj.getDrops().get(0));
-		assertEquals("player", obj.getDsPlayers().get(0));
-		assertEquals("count", obj.getDs().get(0));
-		assertEquals("player", obj.getGoalPlayers().get(0));
-		assertEquals("goalsCount", obj.getGoals().get(0));
-		assertEquals("player", obj.getPMCPlayers().get(0));
-		assertEquals("count", obj.getPMC().get(0));
-		assertEquals("player", obj.getThrowAwayPlayers().get(0));
-		assertEquals("count", obj.getThrowAways().get(0));
 		assertEquals("team", obj.getSchedTeams().get(0));
 		assertEquals("teamId", obj.getSchedTeamIds().get(0));
 		assertEquals("date", obj.getSchedDates().get(0));
 		assertEquals("time", obj.getSchedTimes().get(0));
+		assertEquals("goals", obj.getStatsKeys().get(0));
+		assertEquals("drops", obj.getStatsKeys().get(1));
+		assertEquals("player1", obj.getStatsList("goals").get(0).getPlayerName());
+		assertEquals("1", obj.getStatsList("goals").get(0).getStatValue());
 	}
 	
 	public void testVideoListItem(){

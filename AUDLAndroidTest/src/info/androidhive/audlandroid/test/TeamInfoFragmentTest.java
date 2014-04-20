@@ -44,23 +44,8 @@ public class TeamInfoFragmentTest extends android.test.AndroidTestCase{
 		assertEquals("Testing the parsing of schedule team name", "183001", team.getSchedTeamIds().get(0));
 		assertEquals("Testing the parsing of schedule date", "4/12/14", team.getSchedDates().get(0));
 		assertEquals("Testing the parsing of schedule time", "7:30 PM EST", team.getSchedTimes().get(0));
-		assertEquals("Testing the parsing of team goal stats", 3, team.getGoalPlayers().size());
-		assertEquals("Testing the parsing of team goal player", "Scott R", team.getGoalPlayers().get(0));
-		assertEquals("Testing the parsing of team goals", "42", team.getGoals().get(0));
-		assertEquals("Testing the parsing of team assist stats", 1, team.getAssistPlayers().size());
-		assertEquals("Testing the parsing of team assist player", "Animal", team.getAssistPlayers().get(0));
-		assertEquals("Testing the parsing of team assists", "55", team.getAssists().get(0));
-		assertEquals("Testing the parsing of team drop stats", 1, team.getDropPlayers().size());
-		assertEquals("Testing the parsing of team drop player", "Dave W", team.getDropPlayers().get(0));
-		assertEquals("Testing the parsing of team drops", "8", team.getDrops().get(0));
-		assertEquals("Testing the parsing of team throwaway stats", 1, team.getThrowAwayPlayers().size());
-		assertEquals("Testing the parsing of team throwaway player", "Dave W", team.getThrowAwayPlayers().get(0));
-		assertEquals("Testing the parsing of team throwaways", "56", team.getThrowAways().get(0));
-		assertEquals("Testing the parsing of team pmc stats", 2, team.getPMCPlayers().size());
-		assertEquals("Testing the parsing of team pmc player", "Scott R", team.getPMCPlayers().get(0));
-		assertEquals("Testing the parsing of team pmcs", "75", team.getPMC().get(0));
-		assertEquals("Testing the parsing of team D's stats", 1, team.getDsPlayers().size());
-		assertEquals("Testing the parsing of team D's player", "Dave W", team.getDsPlayers().get(0));
-		assertEquals("Testing the parsing of team D's", "28", team.getDs().get(0));
+		assertEquals("Testing the stat keys", 6, team.getStatsKeys().size());
+		assertEquals("Testing parsing of stat types", "Dave W", team.getStatsList("Ds").get(0).getPlayerName());
+		assertEquals("Testing parsing of stat types", "28", team.getStatsList("Ds").get(0).getStatValue());
 	}
 }

@@ -45,6 +45,11 @@ public class MainActivityTest extends android.test.ActivityInstrumentationTestCa
 	    activity = getActivity();
 	}
 	
+	@Override
+	protected void tearDown() throws Exception {
+		activity.finish();
+	}
+	
 	public void testNumberOfSections(){
 		int drawerListId = info.androidhive.audlandroid.R.id.list_slidermenu;
 		assertNotNull(activity.findViewById(drawerListId));
