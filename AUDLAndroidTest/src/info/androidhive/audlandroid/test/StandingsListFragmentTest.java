@@ -29,15 +29,16 @@ public class StandingsListFragmentTest extends android.test.AndroidTestCase{
 	}
 	
 	public void testParseJson() throws Exception {
-		String response = "[[\"Midwest Division\", [\"Madison Radicals\", 10, 3], [\"Chicago Wildfire\", 9, 4]], [\"Eastern Division\", [\"DC Breeze\", 10, 3], [\"New York Empire\", 9, 4]]]";
+		String response = "[[\"Western\", [\"Vancouver Riptide\", 6226234774126592, 3, 0, 29], [\"San Jose Spiders\", 6597766625099776, 2, 0, 23], [\"San Francisco FlameThrowers\", 5094953273262080, 1, 1, 19], [\"Seattle Raptors\", 5648334039547904, 0, 1, -5], [\"Salt Lake Lions\", 5716606839685120, 0, 4, -66]]]";
 		JSONArray jsonResult = new JSONArray(response);
 		ArrayList<ArrayList<TeamRecordItem>> leagueRecords = mFragment.parseJSON(jsonResult);
-		assertEquals("Number of Divisions",2,leagueRecords.size());
-		assertEquals("Number of Teams in Midwest Division",2,leagueRecords.get(0).size());
-		assertEquals("Number of Teams in Eastern Division",2,leagueRecords.get(0).size());
-		assertTrue("First recordItem in Midwest Division",leagueRecords.get(0).get(0).equals(new TeamRecordItem("Madison Radicals","10","3")));
-		assertTrue("Second recordItem in Midwest Division",leagueRecords.get(0).get(1).equals(new TeamRecordItem("Chicago Wildfire","9","4")));
-		assertTrue("First recordItem in Eastern Division",leagueRecords.get(1).get(0).equals(new TeamRecordItem("DC Breeze","10","3")));
-		assertTrue("Second recordItem in Eastern Division",leagueRecords.get(1).get(1).equals(new TeamRecordItem("New York Empire","9","4")));
+		assertEquals("Number of Divisions",1,leagueRecords.size());
+		assertEquals("Number of Teams in Western Division",5,leagueRecords.get(0).size());
+		assertTrue("First recordItem in Westerm Division",leagueRecords.get(0).get(0).equals(new TeamRecordItem("Vancouver Riptide","6226234774126592","3","0","29")));
+		assertTrue("Second recordItem in Western Division",leagueRecords.get(0).get(1).equals(new TeamRecordItem("San Jose Spiders","6597766625099776","2","0","23")));
+		assertTrue("First recordItem in Western Division",leagueRecords.get(0).get(2).equals(new TeamRecordItem("San Francisco FlameThrowers","5094953273262080","1","1","19")));
+		assertTrue("Second recordItem in Western Division",leagueRecords.get(0).get(3).equals(new TeamRecordItem("Seattle Raptors","5648334039547904","0","1","15")));
+		
+		
 	}
 }

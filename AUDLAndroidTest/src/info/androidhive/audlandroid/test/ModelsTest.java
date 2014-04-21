@@ -60,8 +60,8 @@ public class ModelsTest extends android.test.AndroidTestCase{
 	}
 	
 	public void testScoreListItem(){
-		ScoreListItem obj = new ScoreListItem("homeTeam", "homeTeamID", "awayTeam", "awayTeamID", "date", "time", "score");
-		ScoreListItem obj1 = new ScoreListItem("homeTeam1", "homeTeam1ID", "awayTeam1", "awayTeamID1", "date1", "time1", "score");
+		ScoreListItem obj = new ScoreListItem("homeTeam", "homeTeamID", "awayTeam", "awayTeamID", "date", "time", "homeTeamScore","awayTeamScore","status");
+		ScoreListItem obj1 = new ScoreListItem("homeTeam1", "homeTeam1ID", "awayTeam1", "awayTeamID1", "date1", "time1", "homeTeamScore1","awayTeamScore1","status2");
 		assertNotNull(obj);
 		assertEquals("homeTeam", obj.getHomeTeam());
 		assertEquals("homeTeamID", obj.getHomeTeamID());
@@ -69,6 +69,9 @@ public class ModelsTest extends android.test.AndroidTestCase{
 		assertEquals("awayTeamID", obj.getAwayTeamID());
 		assertEquals("date", obj.getDate());
 		assertEquals("time", obj.getTime());
+		assertEquals("homeTeamScore",obj.getHomeTeamScore());
+		assertEquals("awayTeamScore",obj.getAwayTeamScore());
+		assertEquals("status",obj.getGameStatus());
 		assertEquals(true, obj.equals(obj));
 		assertEquals(false, obj.equals(obj1));
 	}
@@ -84,13 +87,15 @@ public class ModelsTest extends android.test.AndroidTestCase{
 	}
 	
 	public void testTeamRecordItem(){
-		TeamRecordItem obj = new TeamRecordItem("teamName", "wins", "losses");
-		TeamRecordItem obj1 = new TeamRecordItem("teamName1", "wins1", "losses1");
+		TeamRecordItem obj = new TeamRecordItem("teamName","teamID","wins", "losses","pointsDiff");
+		TeamRecordItem obj1 = new TeamRecordItem("teamName1","teamID1", "wins1", "losses1","pDiff1");
 		assertNotNull(obj);
 		assertEquals("teamName", obj.getTeamName());
+		assertEquals("teamID",obj.getTeamID());
 		assertEquals("wins", obj.getWins());
 		assertEquals("losses", obj.getLosses());
-		assertEquals("teamName wins losses", obj.toString());
+		assertEquals("pointsDiff",obj.getPointsDiff());
+		assertEquals("teamName teamID wins losses pointsDiff", obj.toString());
 		assertEquals(true, obj.equals(obj));
 		assertEquals(false, obj.equals(obj1));
 	}
