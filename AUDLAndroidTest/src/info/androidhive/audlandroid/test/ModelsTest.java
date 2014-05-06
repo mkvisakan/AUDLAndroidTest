@@ -60,8 +60,8 @@ public class ModelsTest extends android.test.AndroidTestCase{
 	}
 	
 	public void testScoreListItem(){
-		ScoreListItem obj = new ScoreListItem("homeTeam", "homeTeamID", "awayTeam", "awayTeamID", "date", "time", "homeTeamScore","awayTeamScore","status");
-		ScoreListItem obj1 = new ScoreListItem("homeTeam1", "homeTeam1ID", "awayTeam1", "awayTeamID1", "date1", "time1", "homeTeamScore1","awayTeamScore1","status2");
+		ScoreListItem obj = new ScoreListItem("homeTeam", "homeTeamID", "awayTeam", "awayTeamID", "date", "time", "homeTeamScore","awayTeamScore","status", null);
+		ScoreListItem obj1 = new ScoreListItem("homeTeam1", "homeTeam1ID", "awayTeam1", "awayTeamID1", "date1", "time1", "homeTeamScore1","awayTeamScore1","status2", null);
 		assertNotNull(obj);
 		assertEquals("homeTeam", obj.getHomeTeam());
 		assertEquals("homeTeamID", obj.getHomeTeamID());
